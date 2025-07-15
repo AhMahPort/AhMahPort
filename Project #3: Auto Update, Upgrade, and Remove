@@ -1,0 +1,30 @@
+#!/bin/bash
+
+LOG_FILE="/var/log/auto_update.log"
+DATE=$(date '+%Y-%m-%d %H:%M:%S')
+
+echo "[$DATE] Starting update check..." >> $LOG_FILE
+
+# Update package list
+apt update >> $LOG_FILE 2>&1
+
+# Upgrade installed packages
+apt upgrade -y >> $LOG_FILE 2>&1
+
+# Remove unused packages
+apt autoremove -y >> $LOG_FILE 2>&1
+
+echo "[$DATE] Update completed." >> $LOG_FILE
+# Exit and save to terminal
+-------------------------------------------------------------------------------
+	sudo chmod +x /usr/local/bin/auto_update.sh
+	sudo crontab -e
+# Copy and paste "0 4 * * * /usr/local/bin/auto_update.sh" at the bottom, This will run the script every day at 4:00 AM.
+# If it doesn't exist yet, you can create it now:
+	sudo touch /var/log/auto_update.log
+# Make sure the script (run as root via cron) has write access
+	sudo chown root:root /var/log/auto_update.log
+	sudo chmod 644 /var/log/auto_update.log
+	sudo /usr/local/bin/auto_update.sh
+# Then view the log:
+	cat /var/log/auto_update.log
