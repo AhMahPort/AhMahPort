@@ -1,0 +1,29 @@
+import socket
+from datetime import datetime
+
+# Target to scan
+target = input("Enter target IP or hostname: ")
+start_port = 1
+end_port = 1024
+
+print(f"\nStarting scan on {target}")
+print("Scanning ports 1 to 1024...\n")
+start_time = datetime.now()
+
+try:
+    for port in range(start_port, end_port + 1):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.settimeout(0.5)
+        result = s.connect_ex((target, port))
+        if result == 0:
+            print(f"[+] Port {port} is OPEN")
+        s.close()
+except KeyboardInterrupt:
+    print("\nScan cancelled.")
+except socket.gaierror:
+    print("Hostname could not be resolved.")
+except socket.error:
+    print("Couldn't connect to server.")
+
+end_time = datetime.now()
+print(f"\nScan finished in {end_time - start_time}")
