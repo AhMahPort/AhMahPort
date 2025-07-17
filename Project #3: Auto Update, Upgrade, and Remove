@@ -5,17 +5,17 @@ DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
 echo "[$DATE] Starting update check..." >> $LOG_FILE
 
--------# Update package list
+# ------- Update package list
 apt update >> $LOG_FILE 2>&1
 
--------# Upgrade installed packages
+# ------- Upgrade installed packages
 apt upgrade -y >> $LOG_FILE 2>&1
 
--------# Remove unused packages
+# ------- Remove unused packages
 apt autoremove -y >> $LOG_FILE 2>&1
 
 echo "[$DATE] Update completed." >> $LOG_FILE
--------# Exit and save to terminal
+# ------- Exit and save to terminal
 -------------------------------------------------------------------------------
 sudo chmod +x /usr/local/bin/auto_update.sh
 sudo crontab -e
