@@ -19,12 +19,12 @@ echo "[$DATE] Update completed." >> $LOG_FILE
 -------------------------------------------------------------------------------
 sudo chmod +x /usr/local/bin/auto_update.sh
 sudo crontab -e
--------# Copy and paste "0 4 * * * /usr/local/bin/auto_update.sh" at the bottom, This will run the script every day at 4:00 AM.
--------# If it doesn't exist yet, you can create it now:
+# ------- Copy and paste "0 4 * * * /usr/local/bin/auto_update.sh" at the bottom, This will run the script every day at 4:00 AM.
+# ------- If it doesn't exist yet, you can create it now:
 sudo touch /var/log/auto_update.log
--------# Make sure the script (run as root via cron) has write access
+# ------- Make sure the script (run as root via cron) has write access
 sudo chown root:root /var/log/auto_update.log
 sudo chmod 644 /var/log/auto_update.log
 sudo /usr/local/bin/auto_update.sh
--------# Then view the log:
+# ------- Then view the log:
 cat /var/log/auto_update.log
